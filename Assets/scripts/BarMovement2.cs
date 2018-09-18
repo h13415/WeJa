@@ -13,7 +13,7 @@ public class BarMovement2 : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-		rb.velocity = new Vector3(7 * Mathf.Cos(Time.time), 0, 0);
+		rb.velocity = new Vector3(0, 0, 7 * Mathf.Cos(Time.time));
 	}
 	
 }

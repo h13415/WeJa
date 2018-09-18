@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	// Use this for initialization
+	public float speed = 10f;
+	public float smooth = 5f;
+	private Vector3 derection;
+	private Vector3 force;
+
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+		Transform transform = GetComponent<Transform>();
 	}
 
-	public float speed = 10;
+
+	void Update () {
+
+		derection = Input.GetAxis("Horizontal") * Vector3.forward;
+		force = derection * speed;
+	}
 
 	void FixedUpdate () {
-    
-		float x = Input.GetAxis("Horizontal") * speed;
 
 		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		rigidbody.AddForce(force);
+		
+		if (derection.magnitude > 0.1) {
 
-		rigidbody.AddForce(x, 0, 0);
+			Quaternion rotation = Quaternion.LookRotation(-derection);
+        	transform.rotation = Quaternion.Lerp(transform.rotation, rotation,  Time.deltaTime * smooth);
+		}
 	}
 }

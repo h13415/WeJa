@@ -4,19 +4,36 @@ using UnityEngine;
 
 public class stageSelect : MonoBehaviour {
 
-	// Use this for initialization
+	private Vector3 derection;
+	public float smooth = 1f;
+
+	public float timeOut = 1f;
+	private float timeElapsed;
+
 	void Start () {
 
 		Transform transform = GetComponent<Transform>();
-		
+		Debug.Log(transform.rotation);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
-		if(Input.GetKeyDown(KeyCode.S)) {
+		timeElapsed += Time.deltaTime;
+
+		if(timeElapsed >= timeOut && Input.GetKeyDown(KeyCode.S)) {
 			
-			transform.RotateAround(Vector3.zero, Vector3.up, -90);
+			derection = Quaternion.Euler(0f, -90f, 0f) * transform.forward;
+
+			Debug.Log(derection);
+			
+			timeElapsed = 0f;
 		}
+
+		Quaternion rotation = Quaternion.LookRotation(derection);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation,  Time.deltaTime * smooth);
+
+		Debug.Log(timeElapsed);
 	}
+	
+	
 }

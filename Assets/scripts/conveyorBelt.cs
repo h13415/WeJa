@@ -25,7 +25,7 @@ public class conveyorBelt : MonoBehaviour {
 	// Material Velocity
 	[SerializeField]
 	public float scrollSpeed = 0.5f;
-	public Renderer rend;
+	private Renderer rend;
 
 
 	void Start () {

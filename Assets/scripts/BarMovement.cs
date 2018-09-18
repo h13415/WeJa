@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class BarMovement : MonoBehaviour {
 
+	public float stroke = 15;
+	
 	private Rigidbody rb;
 
 	void Start () {
 
 		rb = GetComponent<Rigidbody>();
-
 	}
 
 	void FixedUpdate () {
 
-		rb.velocity = new Vector3(0, 15 * Mathf.Cos(Time.time), 0);
-
+		rb.velocity = new Vector3(0, stroke * Mathf.Cos(Time.time), 0);
 	}
 }
